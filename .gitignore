@@ -1,0 +1,4 @@
+/target
+.fastlemma_cache/
+*.log
+.DS_Store

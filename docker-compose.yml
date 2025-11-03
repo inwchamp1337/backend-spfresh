@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  vector-api:
+    build: .
+    image: vector-search-api:latest
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - RUST_LOG=info
+      # Optionally override config path (default ./config.json copied into image)
+      # - VECTOR_CONFIG_PATH=/app/config.json
+    volumes:
+      # Persist data (append-only metadata and index files)
+      - ./data:/app/data
+      # If you prefer to mount the SPFresh Release folder from host instead of baking into the image
+      # - ./SPFresh/SPFresh/Release:/usr/local/lib/spfresh-release:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1.50'
+          memory: 1G
